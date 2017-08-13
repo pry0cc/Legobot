@@ -157,7 +157,11 @@ class IRC(Lego):
         logger.info(message)
 
         lines = []
-        target = message['metadata']['opts']['target']
+        if message['metadata']['opts'] is not None:
+            logger.error(message['metadata'])
+            target = message['metadata']['opts']['target']
+        else:
+            target = None
         if '\n' in message['text']:
             lines = message['text'].split('\n')
         else:
